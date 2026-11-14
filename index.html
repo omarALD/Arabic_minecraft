@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#4aa8ff" />
+  <title>⛏️ ماينكرافت عربية</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>" />
+
+  <!-- خطوط عربية (إن لم يتوفر الإنترنت يُستخدم خط النظام تلقائياً) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&family=Lalezar&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/ui/style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- ===== واجهة اللعب (HUD) ===== -->
+  <div id="vignette"></div>
+  <div id="crosshair"></div>
+  <div id="hint"><kbd>F3</kbd> معلومات <span class="dot">•</span> <kbd>Esc</kbd> إيقاف مؤقت</div>
+  <div id="hotbar"></div>
+
+  <!-- ===== الشاشة الرئيسية / الإيقاف المؤقت ===== -->
+  <div id="overlay">
+
+    <!-- خلفية متحركة -->
+    <div class="scene" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+      <div class="hills far"></div>
+      <div class="hills near"></div>
+      <div class="ground"></div>
+    </div>
+
+    <main class="menu">
+      <header class="brand">
+        <div class="badge">
+          <span class="when-fresh">نسخة تجريبية • مفتوحة المصدر</span>
+          <span class="when-started">⏸ اللعبة متوقفة</span>
+        </div>
+        <h1 class="logo">
+          <span class="l1">ماينكرافت</span>
+          <span class="l2">عربية</span>
+        </h1>
+        <p class="tagline">ابنِ، احفر، واستكشف عالمك المكعّب</p>
+      </header>
+
+      <div class="play" role="button">
+        <span class="when-fresh">▶ ابدأ المغامرة</span>
+        <span class="when-started">▶ متابعة اللعب</span>
+      </div>
+
+      <section class="card" aria-label="التحكم">
+        <h2>🎮 التحكم</h2>
+        <div class="controls">
+
+          <div class="ctl">
+            <div class="wasd"><kbd class="w">W</kbd><kbd class="a">A</kbd><kbd class="s">S</kbd><kbd class="d">D</kbd></div>
+            <span class="label">الحركة</span>
+          </div>
+
+          <div class="ctl">
+            <div class="keys"><kbd class="wide">Space</kbd></div>
+            <span class="label">القفز</span>
+          </div>
+
+          <div class="ctl">
+            <div class="keys"><kbd class="wide">Shift</kbd></div>
+            <span class="label">الجري</span>
+          </div>
+
+          <div class="ctl">
+            <div class="keys"><i class="mouse l"></i></div>
+            <span class="label">كسر <small>(اضغط باستمرار)</small></span>
+          </div>
+
+          <div class="ctl">
+            <div class="keys"><i class="mouse r"></i></div>
+            <span class="label">وضع مكعب</span>
+          </div>
+
+          <div class="ctl">
+            <div class="keys"><kbd>1</kbd><span class="to">–</span><kbd>7</kbd></div>
+            <span class="label">اختيار المكعب <small>(أو عجلة الماوس)</small></span>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="tips when-fresh" aria-live="off">
+        <span>💡 ما تكسره يدخل مخزونك، استخدمه للبناء</span>
+        <span>💡 الحجر أصعب كسراً من التراب والأوراق</span>
+        <span>💡 كسر العشب يعطيك تراباً</span>
+      </div>
+
+      <p class="touch-note">⚠️ اللعبة تحتاج لوحة مفاتيح وماوس</p>
+
+      <footer class="foot">صُنعت للتسلية ⛏️ • الكود مفتوح للجميع</footer>
+    </main>
+  </div>
+
+  <noscript><p style="position:fixed;inset:0;display:grid;place-items:center;background:#111;color:#fff;z-index:99">فعّل JavaScript لتشغيل اللعبة</p></noscript>
+
+  <!-- يبدّل نص الشاشة من "ابدأ" إلى "متابعة" بعد أول دخول -->
+  <script>
+    (function () {
+      var ov = document.getElementById("overlay");
+      new MutationObserver(function () {
+        if (ov.classList.contains("hidden")) document.body.classList.add("started");
+      }).observe(ov, { attributes: true, attributeFilter: ["class"] });
+    })();
+  </script>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
