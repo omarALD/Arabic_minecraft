@@ -7,6 +7,7 @@
 export const CHUNK_SIZE = 16;
 export const WORLD_HEIGHT = 64;
 export const RENDER_DISTANCE = 3; // بالـ chunks
+export type BlockId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export const PLAYER_WIDTH = 0.6;
 export const PLAYER_HEIGHT = 1.8;
@@ -48,6 +49,8 @@ export const BLOCKS: Record<Exclude<BlockId, 0>, BlockDef> = {
   5: { id: 5, name: "أوراق", tiles: [6, 6, 6, 6, 6, 6], color: "#3e7828", hardness: 0.2, drop: 5 },
   6: { id: 6, name: "رمل",   tiles: [7, 7, 7, 7, 7, 7], color: "#ded0a0", hardness: 0.5, drop: 6 },
   7: { id: 7, name: "ألواح", tiles: [8, 8, 8, 8, 8, 8], color: "#ac8452", hardness: 0.8, drop: 7 },
-};
+  8: { id: 8, name: "طوب", tiles: [9, 9, 9, 9, 9, 9], color: "#a0522d", hardness: 1.2, drop: 8 },
 
+};
+export const HOTBAR: BlockId[] = [1, 2, 3, 4, 5, 6, 7, 8];
 export const HOTBAR: BlockId[] = [1, 2, 3, 4, 5, 6, 7];

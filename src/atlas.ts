@@ -138,6 +138,21 @@ function tilePlanks(): HTMLCanvasElement {
     }
   });
 }
+export const ATLAS_TILE_COUNT = 10;
+
+function tileBricks(): HTMLCanvasElement {
+  return createTileCanvas(d => {
+    fillNoise(d, 160, 82, 60, 20);
+    for (let y = 0; y < TILE_SIZE; y++) {
+      for (let x = 0; x < TILE_SIZE; x++) {
+        const row = y >> 2;
+        const off = row % 2 ? 4 : 0;
+        if (y % 4 === 0 || (x + off) % 8 === 0) setPx(d, x, y, 200, 190, 180);
+      }
+    }
+  });
+}
+// وأضفها في مصفوفة tiles بعد tilePlanks()
 
 /* =========================================================
    بناء الأطلس النهائي
@@ -153,6 +168,7 @@ export function buildAtlas(): THREE.CanvasTexture {
     tileLeaves(),     // 6
     tileSand(),       // 7
     tilePlanks(),     // 8
+    
   ];
 
   const atlas = document.createElement("canvas");
